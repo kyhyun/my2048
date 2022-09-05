@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My2048</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/291d90d700.js" crossorigin="anonymous"></script>
     <script src="/my2048.js" defer></script>
   </head>
   <body>
@@ -14,24 +15,33 @@
         <div class="info">
           <h1>MY 2048</h1>
           <div class="scoreContent">
-            <div class="score">
+            <div class="scoreWrap">
               <p>SCORE</p>
-              <p>0</p>
+              <p class="score">0</p>
             </div>
-            <div class="bestScore">
+            <div class="bestScoreWrap">
               <p>BEST</p>
-              <p>0</p>
+              <p class="bestScore">0</p>
             </div>
           </div>
         </div>
 
         <div class="stateControl">
           <button type="button" class="button newGame">New Game</button>
-          <button type="button" class="button reset">Reset</button>
+          <button type="button" class="button return">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
         </div>
       </header>
       <main class="main">
         <table class="table"></table>
+        <section class="modal invisible">
+          <p class="modalText">GAME OVER</p>
+          <div>
+            <button type="button" class="button newGame">New Game</button>
+            <button type="button" class="button return">Continue</button>
+          </div>
+        </section>
       </main>
     </div>
   </body>

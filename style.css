@@ -68,7 +68,7 @@ p {
   height: 100px;
 }
 
-.score {
+.scoreWrap {
   width: 120px;
   border: 1px solid var(--white-color);
   border-radius: var(--xsmall-size);
@@ -77,17 +77,17 @@ p {
   color: var(--white-color);
 }
 
-.score > p:first-child {
+.scoreWrap > p:first-child {
   padding: var(--small-size) 0;
   border-bottom: 1px solid var(--white-color);
   font-weight: 700;
 }
 
-.score > p:last-child {
+.score {
   line-height: 50px;
 }
 
-.bestScore {
+.bestScoreWrap {
   width: 120px;
   border: 1px solid var(--white-color);
   border-radius: var(--xsmall-size);
@@ -95,13 +95,13 @@ p {
   color: var(--white-color);
 }
 
-.bestScore > p:first-child {
+.bestScoreWrap > p:first-child {
   padding: var(--small-size) 0;
   border-bottom: 1px solid var(--white-color);
   font-weight: 700;
 }
 
-.bestScore > p:last-child {
+.bestScore {
   line-height: 50px;
 }
 
@@ -110,11 +110,10 @@ p {
   justify-content: flex-end;
   align-items: center;
   height: 60px;
-  padding-right: 20px;
 }
 
 .button {
-  width: 100px;
+  width: 120px;
   height: 50px;
   border: 1px solid var(--white-color);
   border-radius: 12px;
@@ -129,6 +128,10 @@ p {
 
 .newGame {
   margin-right: var(--small-size);
+}
+
+.main {
+  position: relative;
 }
 
 .table {
@@ -148,6 +151,37 @@ p {
   border: 10px solid var(--sub-color);
   border-radius: calc(var(--xsmall-size) / 2);
   font-size: var(--large-size);
+  font-weight: 700;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 470px;
+  height: 520px;
+  border-radius: 4px;
+  background: white;
+  opacity: 0.6;
+}
+
+.modal.invisible {
+  display: none;
+}
+
+.modal .modalText {
+  margin: 20px 0;
+  font-size: var(--large-size);
+  font-weight: 700;
+  color: var(--black-color);
+}
+
+.modal button {
+  margin-right: 0;
   font-weight: 700;
 }
 

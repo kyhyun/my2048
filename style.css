@@ -170,7 +170,12 @@ p {
 }
 
 .modal.invisible {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
 }
 
 .modal .modalText {
@@ -183,6 +188,15 @@ p {
 .modal button {
   margin-right: 0;
   font-weight: 700;
+}
+
+.buttonWrap .invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
 }
 
 .color-2 {

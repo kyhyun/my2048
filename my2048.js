@@ -2,13 +2,16 @@ const $table = document.querySelector('.table');
 const $score = document.querySelector('.score');
 const $bestScore = document.querySelector('.bestScore');
 const $modal = document.querySelector('.modal');
+const $stateControl = document.querySelector('.stateControl');
+const $modalText = document.querySelector('.modalText');
+const $buttonWrap = document.querySelector('.buttonWrap');
 
 const $$newGameBtn = document.querySelectorAll('.newGame');
 const $$returnBtn = document.querySelectorAll('.return');
 
 let board = [];
 let startCoord;
-const history = [];
+let history = [];
 
 const randomCell = () => {
   const emptyCells = [];
@@ -69,6 +72,7 @@ const startGame = () => {
 
 const restart = () => {
   modalhandler('start');
+  history = [];
   board.forEach((rowData, i) => {
     rowData.forEach((cellData, j) => {
       board[i][j] = 0;
@@ -80,6 +84,13 @@ const restart = () => {
 };
 
 startGame();
+board = [
+  [2, 4, 8, 16],
+  [1024, 1024, 2, 4],
+  [0, 4, 2, 32],
+  [0, 0, 2, 2],
+];
+draw();
 
 // 패배를 판정하는 함수 (요소 안에 합쳐질 부분이 있는지 확인)
 const checkIsCombine = () => {
@@ -229,6 +240,7 @@ const moveCells = (direction) => {
       break;
   }
 
+  // 이전 history 테이블 데이터와 현재 진행중인 테이블 데이터가 같은지 비교
   const _history = JSON.parse(JSON.stringify(history));
   const _prevData = _history.pop();
   if (_prevData !== undefined) {
@@ -238,11 +250,14 @@ const moveCells = (direction) => {
   // 승패 처리 및 프로세스 진행
   if (board.flat().includes(2048)) {
     draw();
-    setTimeout(() => {
-      alert(`승리하셨습니다. 2048을 완성하셨습니다.\n총점 : ${$score.textContent}`);
-    }, 0);
+    [0, 1].forEach((node) => $stateControl.children[node].setAttribute('disabled', 'false'));
+    $modalText.textContent = 'YOU WIN';
+    $buttonWrap.children[1].classList.add('invisible');
+    $modal.classList.remove('invisible');
   } else if (!board.flat().includes(0) && checkIsCombine()) {
-    const $modal = document.querySelector('.modal');
+    [0, 1].forEach((node) => $stateControl.children[node].setAttribute('disabled', 'false'));
+    $modalText.textContent = 'GAME OVER';
+    $buttonWrap.children[1].classList.remove('invisible');
     $modal.classList.remove('invisible');
   } else {
     if (board.flat().includes(0)) {
@@ -288,12 +303,15 @@ $table.addEventListener('mouseup', (event) => {
 
 $$newGameBtn.forEach((element) => {
   element.addEventListener('click', () => {
+    [0, 1].forEach((node) => $stateControl.children[node].removeAttribute('disabled'));
     restart();
   });
 });
 
 $$returnBtn.forEach((element) => {
   element.addEventListener('click', () => {
+    if ($modalText.textContent === 'GAME OVER')
+      [0, 1].forEach((node) => $stateControl.children[node].removeAttribute('disabled'));
     if (!$modal.classList.contains('invisible')) modalhandler('start');
     const prevData = history.pop();
     if (!prevData) return;

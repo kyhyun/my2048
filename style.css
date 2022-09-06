@@ -313,6 +313,7 @@ p {
   .table td {
     width: 62px;
     height: 64px;
+    font-size: var(--mid-size);
   }
 
   .buttonWrap {

@@ -294,6 +294,35 @@ $table.addEventListener('mouseup', (event) => {
   }
 });
 
+$table.addEventListener(
+  'touchstart',
+  (event) => {
+    const touche = event.changedTouches[0];
+    startCoord = [touche.clientX, touche.clientY];
+  },
+  false
+);
+
+$table.addEventListener(
+  'touchend',
+  (event) => {
+    const touche = event.changedTouches[0];
+    const endCoord = [touche.clientX, touche.clientY];
+    const diffX = endCoord[0] - startCoord[0];
+    const diffY = endCoord[1] - startCoord[1];
+    if (diffX < 0 && Math.abs(diffX) > Math.abs(diffY)) {
+      moveCells('left');
+    } else if (diffX > 0 && Math.abs(diffX) > Math.abs(diffY)) {
+      moveCells('right');
+    } else if (diffY < 0 && Math.abs(diffX) <= Math.abs(diffY)) {
+      moveCells('up');
+    } else if (diffY > 0 && Math.abs(diffX) <= Math.abs(diffY)) {
+      moveCells('down');
+    }
+  },
+  false
+);
+
 $$newGameBtn.forEach((element) => {
   element.addEventListener('click', () => {
     [0, 1].forEach((node) => $stateControl.children[node].removeAttribute('disabled'));
